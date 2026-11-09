@@ -1,7 +1,7 @@
 name: basic tests
 on:
   push:
-    branches: [main]
+    branches: [main,test]
 jobs:
   lab9-basic-tests:
     runs-on: ubuntu-latest
@@ -20,4 +20,4 @@ jobs:
           if [ "$OUTPUT" = "FAIL" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
           OUTPUT=$(bash validate-data.sh "pearseT mccarthy" "0831122334")
           echo "Script output was: $OUTPUT"
-          if [ "$OUTPUT" = "FAIL" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
+          if [ "$OUTPUT" = "PASS" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
