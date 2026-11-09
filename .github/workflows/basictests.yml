@@ -1,0 +1,23 @@
+name: basic tests
+on:
+  push:
+    branches: [main]
+jobs:
+  lab9-basic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Make script executable
+        run: chmod +x validate-data.sh
+      - name: Run and verify output
+        run: |
+          OUTPUT=$(bash validate-data.sh "pearse mccarthy" "0831122334")
+          echo "Script output was: $OUTPUT"
+          if [ "$OUTPUT" = "PASS" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
+          OUTPUT=$(bash validate-data.sh "pearse mccarthy" "08311223344")
+          echo "Script output was: $OUTPUT"
+          if [ "$OUTPUT" = "FAIL" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
+          OUTPUT=$(bash validate-data.sh "pearseT mccarthy" "0831122334")
+          echo "Script output was: $OUTPUT"
+          if [ "$OUTPUT" = "FAIL" ]; then echo "Test Passed!"; else echo "Test Failed!"; exit 1; fi
