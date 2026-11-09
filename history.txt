@@ -1,0 +1,55 @@
+  492  cd ~
+  493  gh repo create lab9 --public --clone
+  494  cd lab9
+  495  gh repo view stafa10/lab9 --json visibility
+  496  gh label create EPIC --color 5319E7
+  497  gh label list
+  498  CLEAR
+  499  clear
+  500  gh issue create --title "do lab9" --body "epic for all lab9 work" --label EPIC
+  501  gh issue create --title "create validate-data script" --body "script checks name <= 15 chars and mobile <= 10 chars, echo PASS or FAIL" --label enhancement --assignee @me
+  502  clear
+  503  nano validate-data.sh
+  504  cat validate-data.sh
+  505  bash validate-data.sh "pearse mccarthy" "0831122334"
+  506  bash validate-data.sh "pearse mccarthy" "08311223344"
+  507  bash validate-data.sh "pearseT mccarthy" "0831122334"
+  508  clear
+  509  gh issue create --title "create yaml test script" --body "github action basictests.yml runs the 3 tests on push" --label enhancement --assignee @me
+  510  mkdir -p .github/workflows
+  511  nano .github/workflows/basictests.yml
+  512  cat .github/workflows/basictests.yml
+  513  git add .
+  514  git commit -m "add validate-data script and yaml test, fixes #2, fixes #3"
+  515  git branch -M main
+  516  git push -u origin main
+  517  gh issue list --state all
+  518  gh issue create --title "create lab9 project view" --body "project lab9 with one table view: Label, Title, Assignee" --label enhancement --assignee @me
+  519  clear
+  520  gh project create --owner stafa10 --title "lab9"
+  521  gh project list --owner stafa10
+  522  gh project link NUMBER --owner stafa10 --repo stafa10/lab9
+  523  gh project item-add NUMBER --owner stafa10 --url https://github.com/stafa10/lab9/issues/1
+  524  gh project item-add NUMBER --owner stafa10 --url https://github.com/stafa10/lab9/issues/2
+  525  gh project item-add NUMBER --owner stafa10 --url https://github.com/stafa10/lab9/issues/3
+  526  gh project item-add NUMBER --owner stafa10 --url https://github.com/stafa10/lab9/issues/4
+  527  gh project list --owner stafa10
+  528  gh project link 5 --owner stafa10 --repo stafa10/lab9
+  529  gh project item-add 5 --owner stafa10 --url https://github.com/stafa10/lab9/issues/1
+  530  gh project item-add 5 --owner stafa10 --url https://github.com/stafa10/lab9/issues/2
+  531  gh project item-add 5 --owner stafa10 --url https://github.com/stafa10/lab9/issues/3
+  532  gh project item-add 5 --owner stafa10 --url https://github.com/stafa10/lab9/issues/4
+  533  clear
+  534  gh project edit 5 --owner stafa10 --visibility PUBLIC
+  535  gh issue close 4
+  536  gh issue create --title "create test branch" --body "test branch with name max length 20, fix action to run on main and test" --label enhancement --assignee @me
+  537  git checkout -b test
+  538  nano validate-data.sh
+  539  cat validate-data.sh
+  540  git commit -am "change max name length to 20"
+  541  git push -u origin test
+  542  nano .github/workflows/basictests.yml
+  543  cat .github/workflows/basictests.yml
+  544  git commit -am "run action on main and test branches"
+  545  git push
+  546  history > history.txt
